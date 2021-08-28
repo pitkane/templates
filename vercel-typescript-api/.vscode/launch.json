@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "ts-node - src/index.ts",
+      "type": "node",
+      "request": "launch",
+      "args": ["./src/index.ts"],
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "sourceMaps": true,
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "ts-node - debug selected file",
+      "type": "node",
+      "request": "launch",
+      //     "args": ["${relativeFile}", "--files", "/tmp/logger.stdout"],
+      "args": ["${relativeFile}"],
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "sourceMaps": true,
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector",
+      "console": "integratedTerminal"
+    }
+  ]
+}
