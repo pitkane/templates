@@ -4,7 +4,9 @@ type SliceState = {
   initLoading: Boolean
 }
 
-const initialState: SliceState = { initLoading: true }
+const initialState: SliceState = {
+  initLoading: true,
+}
 
 export const appSlice = createSlice({
   name: 'app',
@@ -16,5 +18,4 @@ export const appSlice = createSlice({
   },
 })
 
-export const appReducer = appSlice.reducer
 export const appActions = appSlice.actions

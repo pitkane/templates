@@ -14,9 +14,8 @@ export interface HeaderProps {}
 export const Header = (props: HeaderProps) => {
   return (
     <StyledHeader>
-      <Link to="/tables">Tables</Link>
-      <Link to="/batches">Batches</Link>
-      <Link to="/test">Test</Link>
+      <Link to="/">Home</Link>
+      <Link to="/example">Example</Link>
       <Link to="/login">Login</Link>
     </StyledHeader>
   )

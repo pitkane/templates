@@ -3,9 +3,7 @@ import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
 
-// todo: use https://firebase.google.com/docs/web/modular-upgrade
-
-// from project settings
+// copy these from Firebase project settings
 const firebaseConfig = {
   apiKey: '',
   authDomain: '',

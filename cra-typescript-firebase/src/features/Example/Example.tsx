@@ -1,18 +1,29 @@
 import { Space, DatePicker, Typography } from 'antd'
 
 import moment from 'moment'
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '../../redux'
+import { fetchExampleData } from './exampleSlice'
 
 const { Text, Link } = Typography
-// const { RangePicker } = DatePicker
 
-export const Test = () => {
-  function onChange(date: moment.Moment | null, dateString: string) {
+export const Example = () => {
+  const onDateChange = (date: moment.Moment | null, dateString: string) => {
     console.log(date, dateString)
   }
 
+  const dispatch = useAppDispatch()
+  const exampleDataStatus = useAppSelector((state) => state.example.status)
+
+  useEffect(() => {
+    if (exampleDataStatus === 'idle') {
+      dispatch(fetchExampleData())
+    }
+  }, [exampleDataStatus, dispatch])
+
   return (
     <Space direction="vertical" size={12}>
-      <DatePicker onChange={onChange} />
+      <DatePicker onChange={onDateChange} />
 
       <Text>Ant Design (default)</Text>
       <Text type="secondary">Ant Design (secondary)</Text>

@@ -6,12 +6,12 @@ export const getExampleData = async (): Promise<ExampleData[]> => {
     const exampleCollectionRef = db.collection('exampleCollection')
     const snapshot = await exampleCollectionRef.get()
 
-    const casted = snapshot.docs.map((doc) => {
+    const dataset = snapshot.docs.map((doc) => {
       const collection = doc.data()
       return collection as ExampleData
     })
 
-    return casted
+    return dataset
   } catch (error) {
     console.error(error)
     throw Error

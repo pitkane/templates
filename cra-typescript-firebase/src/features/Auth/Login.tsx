@@ -23,22 +23,9 @@ export const Login = ({ isAuthenticated }: LoginProps) => {
             initialValues={{ email: '', password: '' }}
             onSubmit={(values, { setSubmitting }) => {
               dispatch(login(values.email, values.password))
-              // setTimeout(() => {
-              //   alert(JSON.stringify(values, null, 2))
-              //   setSubmitting(false)
-              // }, 400)
             }}
           >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting,
-              /* and other goodies */
-            }) => (
+            {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
               <div>
                 <Form onFinish={handleSubmit} name="basic" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
                   <Form.Item label="Username" style={{ marginBottom: 5 }}>

@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
+import styled from 'styled-components'
 import { Layout } from 'antd'
 import _ from 'lodash'
 
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
-
-import { Login } from './features/Auth/Login'
-import { useAppDispatch, useAppSelector } from './redux'
-import { authSlice, selectUser } from './features/Auth/authSlice'
-import { ProtectedRoute } from './utils/auth'
-import Header from './components/Header'
-import { Test } from './features/Test/Test'
-import { firebaseApp } from './utils/firebase'
+import { Login } from '../Auth/Login'
+import { useAppDispatch, useAppSelector } from '../../redux'
+import { authSlice, selectUser } from '../Auth/authSlice'
+import { ProtectedRoute } from '../../utils/auth'
+import Header from '../../components/Header'
+import { Example } from '../Example/Example'
+import { firebaseApp } from '../../utils/firebase'
+import { Home } from '../Home/Home'
 
 const { Content } = Layout
 
 const StyledContent = styled(Content)`
-  min-height: 480px;
+  min-height: 680px;
   background: #fff;
   padding: 24px;
   margin: 0px 24px 24px 24px;
@@ -35,17 +35,14 @@ export const App = () => {
   useEffect(() => {
     const auth = getAuth(firebaseApp)
     onAuthStateChanged(auth, (user: any) => {
-      // detaching the listener
       if (user?.email) {
         dispatch(authSlice.actions.setUser({ email: user.email }))
-        console.log('yes, user already authenticated in', user)
         if (isLoading) {
           setIsLoading(false)
         } else {
           history.push('/home')
         }
       } else {
-        console.log('no, user is not authenticated')
         setIsLoading(false)
         history.push('/login')
       }
@@ -64,12 +61,16 @@ export const App = () => {
             <Login isAuthenticated={isAuthenticated} />
           </Route>
 
-          <ProtectedRoute exact path="/test">
-            <Test />
+          <ProtectedRoute exact path="/">
+            <Home />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/example">
+            <Example />
           </ProtectedRoute>
 
           <Route path="*">
-            <Redirect to={isAuthenticated ? '/tables' : '/login'} />
+            <Redirect to={isAuthenticated ? '/' : '/login'} />
           </Route>
         </Switch>
       </StyledContent>

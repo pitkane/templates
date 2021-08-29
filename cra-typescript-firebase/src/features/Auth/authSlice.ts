@@ -31,21 +31,19 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
   const auth = getAuth(firebaseApp)
   await auth.setPersistence(browserSessionPersistence)
 
-  await signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user
+  try {
+    const userCredentials = await signInWithEmailAndPassword(auth, email, password)
+    const user = userCredentials.user
 
-      if (user) {
-        console.log('Firebase auth ok', user)
-        dispatch(authSlice.actions.setUser({ email }))
-      } else {
-        console.log('no user')
-      }
-    })
-    .catch((error) => {
-      console.error('error with firebase', error)
-    })
+    if (user) {
+      console.log('Firebase auth successful', user)
+      dispatch(authSlice.actions.setUser({ email }))
+    } else {
+      console.log('Firebase auth failure')
+    }
+  } catch (error) {
+    console.error('Firebase auth', error)
+  }
 }
 
 export const logout = () => async (dispatch: Dispatch) => {
