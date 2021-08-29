@@ -6,8 +6,10 @@ Create the bot @ https://core.telegram.org/bots
 
 Set the needed environment variables to `.env.local`.
 
+```
 TELEGRAM_BOT_TOKEN=''
 TELEGRAM_BOT_SECRET=''
+```
 
 `npm ci`
 
@@ -22,3 +24,7 @@ curl -X POST https://api.telegram.org/botYOUR_BOT_TOKEN/setWebhook -H "Content-t
 ```
 
 Invoke bot with commands and your local app should receive the webhook events.
+
+## Vercel
+
+Just setup a normal Vercel app with "Other" framework, this should be automatic. Setup your bot with the correct Vercel app url and your cloud function should receive the events.
