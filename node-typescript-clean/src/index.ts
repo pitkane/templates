@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import yargs from 'yargs'
 import { $ } from 'zx'
 
@@ -19,6 +20,10 @@ const start = async () => {
   // https://github.com/google/zx
   // print out the version from package.json
   await $`cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g'`
+
+  // Remember, you can use .env file to pass some process env variables
+
+  // Shoot
 }
 
 start()
